@@ -9,21 +9,21 @@ trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
 # echo an error message before exiting
 trap 'echo "\"${last_command}\" command filed with exit code $?."' ERR
 
-outFile="./resharper-cli.tar.gz"
+outFile="./resharper-cli.zip"
 gitResharperFolder="./.git/hooks/resharper"
 preCommitFile="./.git/hooks/pre-commit"
-cliUrl="https://download-cf.jetbrains.com/resharper/ReSharperUltimate.2019.3.1/JetBrains.ReSharper.CommandLineTools.Unix.2019.3.1.tar.gz"
+cliUrl="https://download.jetbrains.com/resharper/dotUltimate.2020.3.3/JetBrains.ReSharper.CommandLineTools.2020.3.3.zip"
 preCommitHookUrl="https://raw.githubusercontent.com/GeeWee/reshaper-pre-commit-hook/master/pre-commit-hook.sh"
 
 
 echo "Fetching Resharper CLI tools"
-curl ${cliUrl} > ${outFile}
+curl -L ${cliUrl} > ${outFile}
 
 echo "Cleaning up old versions"
 rm -rf ${gitResharperFolder} # Delete any old versions
 mkdir -p ${gitResharperFolder}
 echo "Extracting into ${gitResharperFolder}"
-tar -xf "./${outFile}" -C ${gitResharperFolder}
+unzip "./${outFile}" -d ${gitResharperFolder}
 
 echo "Adding pre-commit hook"
 curl -s ${preCommitHookUrl} > ${preCommitFile}
