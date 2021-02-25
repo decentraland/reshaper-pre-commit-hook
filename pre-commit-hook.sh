@@ -27,7 +27,6 @@ fi
 
 # Edit your project files here
 echo "Formatting files..."
-SOLUTION_FILE=$(find . -type f -name "unity-client.sln")
 if [[ "$OSTYPE" == "msys"* ]]; then
     # Lightweight shell and GNU utilities compiled for Windows (part of MinGW)
     ./.git/hooks/resharper/cleanupcode.exe --settings="./unity-client/unity-client.sln.DotSettings" --profile="Reformat Code DCL" ./unity-client/unity-client.sln --include="$INCLUDE_STRING"
