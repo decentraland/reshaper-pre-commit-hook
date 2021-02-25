@@ -27,15 +27,15 @@ fi
 
 # Edit your project files here
 echo "Formatting files..."
-SOLUTION_FILE=$(find . -type f -name "*.sln")
+SOLUTION_FILE=$(find . -type f -name "unity-client.sln")
 if [[ "$OSTYPE" == "msys"* ]]; then
     # Lightweight shell and GNU utilities compiled for Windows (part of MinGW)
-    ./.git/hooks/resharper/cleanupcode.exe --profile="Built-in: Reformat Code" $SOLUTION_FILE --include="$INCLUDE_STRING"
+    ./.git/hooks/resharper/cleanupcode.exe --settings="./unity-client/unity-client.sln.DotSettings" --profile="Reformat Code DCL" ./unity-client/unity-client.sln --include="$INCLUDE_STRING"
 elif [[ "$OSTYPE" == "cygwin" ]]; then
     #Cygwin terminal emulator
-    ./.git/hooks/resharper/cleanupcode.exe --profile="Built-in: Reformat Code" $SOLUTION_FILE --include="$INCLUDE_STRING"
+    ./.git/hooks/resharper/cleanupcode.exe --settings="./unity-client/unity-client.sln.DotSettings" --profile="Reformat Code DCL" ./unity-client/unity-client.sln --include="$INCLUDE_STRING"
 else
-    sh ./.git/hooks/resharper/cleanupcode.sh --profile="Built-in: Reformat Code" $SOLUTION_FILE --include="$INCLUDE_STRING"
+    sh ./.git/hooks/resharper/cleanupcode.sh --settings="./unity-client/unity-client.sln.DotSettings" --profile="Reformat Code DCL" ./unity-client/unity-client.sln --include="$INCLUDE_STRING"
 fi
 
 
