@@ -13,7 +13,7 @@ outFile="./resharper-cli.zip"
 gitResharperFolder="./.git/hooks/resharper"
 preCommitFile="./.git/hooks/pre-commit"
 cliUrl="https://download.jetbrains.com/resharper/dotUltimate.2020.3.3/JetBrains.ReSharper.CommandLineTools.2020.3.3.zip"
-preCommitHookUrl="https://raw.githubusercontent.com/GeeWee/reshaper-pre-commit-hook/master/pre-commit-hook.sh"
+preCommitHookUrl="https://raw.githubusercontent.com/decentraland/reshaper-pre-commit-hook/master/pre-commit-hook.sh"
 
 
 echo "Fetching Resharper CLI tools"
