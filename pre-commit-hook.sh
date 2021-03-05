@@ -10,7 +10,7 @@ trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
 trap 'echo "\"${last_command}\" command filed with exit code $?."' ERR
 
 # - Actual script
-STAGED_FILES=`git diff --name-only --cached --diff-filter=d`
+STAGED_FILES=\"`git diff --name-only --cached --diff-filter=d`\"
 echo "Staged files ${STAGED_FILES}"
 
 # Build edit string, by replacing newlines with semicolons.
@@ -34,12 +34,12 @@ echo "Formatting files..."
 SOLUTION_FILE=$(find . -type f -name "unity-client.sln")
 if [[ "$OSTYPE" == "msys"* ]]; then
     # Lightweight shell and GNU utilities compiled for Windows (part of MinGW)
-    ./.git/hooks/resharper/cleanupcode.exe --settings="./unity-client/unity-client.sln.DotSettings" --profile="Reformat Code DCL" ./unity-client/unity-client.sln --include="$INCLUDE_STRING_FILTERED"
+    ./.git/hooks/resharper/cleanupcode.exe --settings="./unity-client/unity-client.sln.DotSettings" --profile="Reformat Code DCL" ./unity-client/unity-client.sln --include="$INCLUDE_STRING_FILTERED" || true
 elif [[ "$OSTYPE" == "cygwin" ]]; then
     #Cygwin terminal emulator
-    ./.git/hooks/resharper/cleanupcode.exe --settings="./unity-client/unity-client.sln.DotSettings" --profile="Reformat Code DCL" ./unity-client/unity-client.sln --include="$INCLUDE_STRING_FILTERED"
+    ./.git/hooks/resharper/cleanupcode.exe --settings="./unity-client/unity-client.sln.DotSettings" --profile="Reformat Code DCL" ./unity-client/unity-client.sln --include="$INCLUDE_STRING_FILTERED" || true
 else
-    sh ./.git/hooks/resharper/cleanupcode.sh --settings="./unity-client/unity-client.sln.DotSettings" --profile="Reformat Code DCL" ./unity-client/unity-client.sln --include="$INCLUDE_STRING_FILTERED"
+    sh ./.git/hooks/resharper/cleanupcode.sh --settings="./unity-client/unity-client.sln.DotSettings" --profile="Reformat Code DCL" ./unity-client/unity-client.sln --include="$INCLUDE_STRING_FILTERED" || true
 fi
 
 
