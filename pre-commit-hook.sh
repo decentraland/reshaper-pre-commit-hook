@@ -10,7 +10,8 @@ trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
 trap 'echo "\"${last_command}\" command filed with exit code $?."' ERR
 
 # - Actual script
-STAGED_FILES=`git diff --name-only --cached --diff-filter=d | sed ':a;N;$!ba;s/\n/;/g'`
+STAGED_FILES=`git diff --name-only --cached --diff-filter=d | sed ':a;N;$!ba;s/\n/;/g' | head -c -1`
+
 echo "Staged files ${STAGED_FILES}"
 
 # Build edit string, by replacing newlines with semicolons.
@@ -45,6 +46,10 @@ fi
 
 # Restage files
 echo "Restaging files: $STAGED_FILES"
-echo ${STAGED_FILES} | xargs -t -l -d ';' git add || true
+
+IFS=';' read -ra ADDR <<< "$STAGED_FILES"
+for i in "${ADDR[@]}"; do
+    git add "$i"
+done
 
 echo "pre-commit hook finished"
